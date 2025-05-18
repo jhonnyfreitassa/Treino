@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>Treino Avançado de Hipertrofia</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fb;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+  }
+  header {
+    text-align: center;
+    margin: 20px 0;
+  }
+  h1, h2 {
+    color: #5c6bc0;
+    text-align: center;
+  }
+  table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    font-size: 14px;
+  }
+  th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+  th {
+    background-color: #8e99f3;
+    color: white;
+  }
+  td {
+    background-color: #f1f1f1;
+  }
+  section {
+    padding: 20px;
+  }
+  .workout-block {
+    width: 90%;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    font-size: 14px;
+  }
+  .workout-block h3 {
+    color: #5c6bc0;
+    margin-bottom: 12px;
+  }
+  .exercise-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+  .exercise-row span {
+    flex: 2 1 60%;
+    min-width: 150px;
+  }
+  .exercise-controls {
+    flex: 1 1 35%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 150px;
+  }
+  .exercise-controls input[type="number"] {
+    width: 60px;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  .exercise-controls input[placeholder] {
+    width: 80px;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  .exercise-controls button {
+    min-width: 40px;
+    padding: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  @media (max-width: 480px) {
+    body {
+      font-size: 14px;
+    }
+    table {
+      font-size: 12px;
+    }
+    section {
+      padding: 10px;
+    }
+    .workout-block {
+      font-size: 12px;
+      padding: 10px;
+    }
+    .exercise-row span {
+      flex: 1 1 100%;
+      margin-bottom: 6px;
+    }
+    .exercise-controls {
+      flex: 1 1 100%;
+      justify-content: flex-start;
+    }
+    .exercise-controls input[type="number"],
+    .exercise-controls input[placeholder] {
+      width: 50px;
+      font-size: 12px;
+      padding: 4px;
+    }
+    .exercise-controls button {
+      font-size: 14px;
+      min-width: 36px;
+      padding: 4px;
+    }
+  }
+  @media (prefers-color-scheme: dark) {
+    body {
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+    table {
+      background-color: #1e1e1e;
+    }
+    th {
+      background-color: #333;
+      color: #fff;
+    }
+    td {
+      background-color: #2a2a2a;
+      color: #e0e0e0;
+    }
+    .workout-block {
+      background-color: #1e1e1e;
+      color: #e0e0e0;
+    }
+    input[type="number"], button {
+      background-color: #2a2a2a;
+      color: #e0e0e0;
+      border: 1px solid #444;
+    }
+  }
+</style>
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#5c6bc0" />
+</head>
+<body>
+<header>
+  <h1>Treino Avançado de Hipertrofia</h1>
+</header>
+
+<section>
+  <h2>📆 Divisão Semanal</h2>
+  <table>
+    <tr><th>Dia</th><th>Grupo Muscular</th><th>Foco</th><th>Feito?</th></tr>
+    <tr><td>1</td><td>Costas</td><td>Posterior + largura/espessura</td><td><button onclick="toggleCheck(this)">⬜</button></td></tr>
+    <tr><td>2</td><td>Peitoral</td><td>Volume e parte inferior</td><td><button onclick="toggleCheck(this)">⬜</button></td></tr>
+    <tr><td>3</td><td>Glúteos + Posterior de Coxa</td><td>Ênfase em glúteos</td><td><button onclick="toggleCheck(this)">⬜</button></td></tr>
+    <tr><td>4</td><td>Quadríceps + Panturrilhas</td><td>Ênfase em quadríceps</td><td><button onclick="toggleCheck(this)">⬜</button></td></tr>
+    <tr><td>5</td><td>Ombros</td><td>Equilíbrio e estabilidade</td><td><button onclick="toggleCheck(this)">⬜</button></td></tr>
+    <tr><td>6</td><td>Bíceps + Tríceps</td><td>Braços em geral</td><td><button onclick="toggleCheck(this)">⬜</button></td></tr>
+    <tr><td>7</td><td>Full Body</td><td>Treino geral de corpo inteiro</td><td><button onclick="toggleCheck(this)">⬜</button></td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>🔁 Progressão Semanal (4 semanas)</h2>
+  <table>
+    <tr><th>Semana</th><th>Repetições alvo</th><th>Carga</th><th>Observação</th><th>Feito?</th></tr>
+    <tr><td>1</td><td>12-15 reps</td><td>Moderada</td><td>Foque em execução e controle</td><td><button onclick="toggleCheck(this)">⬜</button></td></tr>
+    <tr><td>2</td><td>10-12 reps</td><td>Levemente maior</td><td>Aumente a carga mantendo a forma</td><td><button onclick="toggleCheck(this)">⬜</button></td></tr>
+    <tr><td>3</td><td>8-10 reps</td><td>Alta</td><td>Foco em força e intensidade</td><td><button onclick="toggleCheck(this)">⬜</button></td></tr>
+    <tr><td>4</td><td>12-15 reps</td><td>Reduz carga</td><td>Semana de deload (recuperação ativa)</td><td><button onclick="toggleCheck(this)">⬜</button></td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>🧱 Estrutura de Treino Semanal</h2>
+
+  <div class="workout-block">
+    <h3>🔹 Dia 1 – Costas</h3>
+    <div class="exercise-row">
+      <span>Barra fixa – 4x até falha</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+    <div class="exercise-row">
+      <span>Remada curvada com barra – 4x10</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+    <div class="exercise-row">
+      <span>Remada unilateral com halter (banco 45º) – 4x12</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+    <div class="exercise-row">
+      <span>Pulldown pegada neutra – 4x12</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+    <div class="exercise-row">
+      <span>Remada baixa no cabo – 4x12</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+    <div class="exercise-row">
+      <span>Encolhimento com halteres – 4x15</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="workout-block">
+    <h3>🔹 Dia 2 – Peitoral (ênfase inferior)</h3>
+    <div class="exercise-row">
+      <span>Supino declinado com barra – 5x8-10</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+    <div class="exercise-row">
+      <span>Supino reto com halteres – 4x10</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+    <div class="exercise-row">
+      <span>Crucifixo declinado – 4x12</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+    <div class="exercise-row">
+      <span>Mergulho nas paralelas – 4x até falha</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+    <div class="exercise-row">
+      <span>Cross-over com cabos altos – 4x15</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+    <div class="exercise-row">
+      <span>Pullover com halter – 3x15</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="workout-block">
+    <h3>🔹 Dia 3 – Glúteos + Posterior de Coxa</h3>
+    <div class="exercise-row">
+      <span>Agachamento sumô com barra – 4x10</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+    <div class="exercise-row">
+      <span>Passada longa com halteres – 4x12 (cada perna)</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+    <div class="exercise-row">
+      <span>Elevação pélvica com barra – 5x10</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+    <div class="exercise-row">
+      <span>Stiff com halteres – 4x12</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+    <div class="exercise-row">
+      <span>Cadeira flexora – 4x15</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+    <div class="exercise-row">
+      <span>Abdução no cabo/máquina – 4x20</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="workout-block">
+    <h3>🔹 Dia 4 – Quadríceps + Panturrilhas</h3>
+    <div class="exercise-row">
+      <span>Agachamento frontal – 4x8</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+    <div class="exercise-row">
+      <span>Leg press (pés baixos) – 4x12</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+    <div class="exercise-row">
+      <span>Avanço no smith – 4x10</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+    <div class="exercise-row">
+      <span>Cadeira extensora – 4x15</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+    <div class="exercise-row">
+      <span>Panturrilha em pé – 4x20</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+    <div class="exercise-row">
+      <span>Panturrilha sentada – 4x20</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+    <div class="exercise-row">
+      <span>Panturrilha no leg press – 3x25</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="workout-block">
+    <h3>🔹 Dia 5 – Ombros</h3>
+    <div class="exercise-row">
+      <span>Desenvolvimento com halteres – 4x10</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+    <div class="exercise-row">
+      <span>Elevação lateral – 4x12</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+    <div class="exercise-row">
+      <span>Desenvolvimento Arnold – 4x10</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+    <div class="exercise-row">
+      <span>Encolhimento com barra – 4x15</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="workout-block">
+    <h3>🔹 Dia 6 – Bíceps + Tríceps</h3>
+    <div class="exercise-row">
+      <span>Rosca direta com barra – 4x10</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+    <div class="exercise-row">
+      <span>Rosca martelo – 4x12</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+    <div class="exercise-row">
+      <span>Tríceps testa com barra – 4x12</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+    <div class="exercise-row">
+      <span>Tríceps corda no pulley – 4x15</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="workout-block">
+    <h3>🔹 Dia 7 – Treino Full Body</h3>
+    <div class="exercise-row">
+      <span>Agachamento livre – 3x10</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+    <div class="exercise-row">
+      <span>Supino reto – 3x10</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+    <div class="exercise-row">
+      <span>Remada curvada – 3x10</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+    <div class="exercise-row">
+      <span>Desenvolvimento de ombro – 3x12</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+    <div class="exercise-row">
+      <span>Rosca direta – 3x12</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+    <div class="exercise-row">
+      <span>Tríceps pulley – 3x15</span>
+      <div class="exercise-controls">
+        <input type="number" min="0" max="10" value="0" />
+        <input placeholder="Peso (Kg)" type="number" />
+        <button onclick="toggleCheck(this)">⬜</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+function toggleCheck(btn) {
+  btn.textContent = btn.textContent === '✅' ? '⬜' : '✅';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const pesoInputs = document.querySelectorAll('input[placeholder="Peso (Kg)"]');
+  pesoInputs.forEach(input => {
+    const exerciseText = input.closest('.exercise-row').querySelector('span').textContent.trim();
+    const storageKey = 'peso_' + exerciseText;
+    const savedValue = localStorage.getItem(storageKey);
+    if (savedValue !== null) {
+      input.value = savedValue;
+    }
+    input.addEventListener('input', () => {
+      localStorage.setItem(storageKey, input.value);
+    });
+  });
+});
+</script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(reg => console.log('Service Worker registrado com sucesso:', reg.scope))
+        .catch(err => console.log('Falha ao registrar Service Worker:', err));
+    });
+  }
+</script>
+</body>
+</html>
